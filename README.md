@@ -18,4 +18,4 @@ If the user wants to stop fetch the data, the “Stop” button could stop getti
 ## How to use the file
 1. Download the *fetchData.html* and *jquery-3.6.0.js* JQuery library file, assign them in the same directory
 2. Open the HTML file in a browser
-3. Data will be fetch from ThingSpeak every 30 second and refresh automatically if the data has changed. 
+3. Data will be fetch from ThingSpeak every 30 second and It will refresh automatically if the data has changed. 
