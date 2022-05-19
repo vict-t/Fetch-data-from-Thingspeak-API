@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html height="100%">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<head>
+    <title>Fetch Data From ThingSpeak</title>
+  <!-- jQueny -->
+    <script type="text/javascript" src="jquery-3.6.0.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <script type="text/javascript">
+        var timer = null;
+        $(document).ready(function () {
+            $("#start").click(function () {
+                GetData();
+            });
+            $("#stop").click(function () {
+                document.getElementById("txtField1").value = ""; // clear value in all text field
+                document.getElementById("txtField2").value = "";
+                document.getElementById("txtField3").value = "";
+                if (timer !== null) {
+                    clearTimeout(timer);
+                    //clear a timer set with the setTimeout method.
+                }
+            });
+        });
+
+        function GetData() {
+            var url = 'https://api.thingspeak.com/channels/12397/feeds.json?results=1';
+            $.ajax
+                ({
+                    url: url,
+                    type: 'GET',
+                    contentType: "application/json",
+                    //dataType: "json",
+                    //crossDomain: true,
+                    success: function (data, textStatus, xhr) {
+                        $.each(data, function (i, item) {
+                            if (i == 'feeds') {
+                                var ubound = item.length;
+                                var Humidity = item[ubound - 1].field3;
+                                var temp = item[ubound - 1].field4;
+                                // return data to the text field.
+                                $('#txtField1').val(Humidity);
+                                $('#txtField2').val(temp);
+                                $('#txtField3').val(Math.round(((temp)-32)*5/9*10)/10); //convert Fahrenheit to Celsius, round up to 1 decimal place
+
+                            }
+                        });
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+
+            timer = setTimeout(GetData, 30000); //drive event REPEAT timer for fetching the data from ThingSpeak platform
+        }
+    </script>
+</head>
+
+<div class="container">
+    <div id="link_wrapper">
+
+        <body height="100%">
+            <table width="100%" height="100%">
+                <tr height="5%">
+                    <td style="background: #F0F0F0" style="border-collapse: collapse; border: 1px solid #CDCDCD;">
+                        Temperature Data fetched from MathWorks Weather Station every 30 seconds
+                    </td>
+                </tr>
+                <tr height="95%">
+                    <td>
+                        <table width="100%" height="100%"
+                            style="border-collapse: collapse; border: 1px solid #CDCDCD;">
+                            <tr width="50%" valign="center">
+                                <td valign="top">
+                                    <table class = "table">
+                                        <thead class="thead-light">
+                                            <td>Parameter</td>
+                                            <td>Value</td>
+                                        </thead>
+                                        <tr>
+                                            <td>Humidity:</td>
+                                            <td><input id="txtField1" type="text" readonly/></td> <!--User cannot modify the value in the input text box-->
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Temperature (F):</td>
+                                            <td><input id="txtField2" type="text" readonly/></td> <!--User cannot modify the value in the input text box-->
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Temperature (C):</td>
+                                            <td><input id="txtField3" type="text" readonly/></td> <!--User cannot modify the value in the input text box-->
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td><button id="start" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="true">Get Data</button></td>
+                                            <td><button id="stop" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="true">Stop</button></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+    </div>
+</div>
+
+</body>
+</html>
