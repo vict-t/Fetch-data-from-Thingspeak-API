@@ -4,7 +4,7 @@
 - Design a HTML file to get data from the ThingSpeak Channel with jQuery, ajax, css/html elements and design interact buttom functions with JavaScript.
 
 ## Desciption
-**fetchData.html** is the HTML file that intented to get the temperature data from ThingSpeak IoT platform. There are two buttom function. If the user click the “Get Data” button, the page can download the real-time update weather data, including humidity and temperature (Fahrenheit and degrees Celsius), from the MathWorks Weather Station ([thingspeak channel link](https://thingspeak.com/channels/12397)). 
+**fetchData.html** is the HTML file that intented to get the temperature data from ThingSpeak IoT platform. There are two buttom functions. If the user click the “Get Data” button, the page can download the real-time update weather data, including humidity and temperature (Fahrenheit and degrees Celsius), from the MathWorks Weather Station ([thingspeak channel link](https://thingspeak.com/channels/12397)). 
 
 If the user wants to stop fetch the data, the “Stop” button could stop getting data by clearing the timeout set for looping the getData function, and clear the value in the text field.
 
