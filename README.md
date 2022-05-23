@@ -9,9 +9,9 @@
 If the user wants to stop fetch the data, the “Stop” button could stop getting data by clearing the timeout set for looping the getData function, and clear the value in the text field.
 
 ## Capture
-1. After the user click the **Get Data** Buttom
+1. After the user click the **Get Data** Buttom, the data will be fetched in the data field. Noted that the user cannot modify the value in the text field.
 ![image](https://user-images.githubusercontent.com/44689459/169243228-7315e76d-a2f4-4115-bb16-3908748c0b72.png)
-2. After the user click the **Stop** Buttom
+2. After the user click the **Stop** Buttom, the program will stop fetching the data, and clear all data in the data field.
 ![image](https://user-images.githubusercontent.com/44689459/169242697-3db5abbb-c2c2-4a77-91a4-a212314948fc.png)
 
 
